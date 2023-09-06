@@ -1,0 +1,166 @@
+.container-group {
+    width: 1000px;
+    height: 620px;
+    margin-left: auto;
+    margin-right: auto;
+    /* background-color: #FFFFFF; */
+}
+
+.active {
+    border-bottom: solid 0px #35C025 !important;
+}
+
+.deselect {
+    border-bottom: solid 0px #D93C85 !important;
+}
+
+#start-streaming {
+    border-radius: 20px !important;
+    border: 1px solid #D93C85 !important;
+    background-color: #D93C85 !important;
+    color: white !important;
+    margin-bottom: 15px;
+}
+
+
+/**
+        * ==============================================
+        * Dot Typing
+        * ==============================================
+        */
+
+.loader-container {
+    position: relative;
+    left: 50%;
+    top: 20px;
+}
+
+.dot-typing {
+    position: relative;
+    left: -9999px;
+    width: 10px;
+    height: 10px;
+    border-radius: 5px;
+    background-color: #D93C85;
+    color: #D93C85;
+    box-shadow: 9984px 0 0 0 #D93C85, 9999px 0 0 0 #D93C85, 10014px 0 0 0 #D93C85;
+    animation: dotTyping 1.5s infinite linear;
+}
+
+@keyframes dotTyping {
+    0% {
+        box-shadow: 9984px 0 0 0 #D93C85, 9999px 0 0 0 #D93C85, 10014px 0 0 0 #D93C85;
+    }
+    16.667% {
+        box-shadow: 9984px -10px 0 0 #D93C85, 9999px 0 0 0 #D93C85, 10014px 0 0 0 #D93C85;
+    }
+    33.333% {
+        box-shadow: 9984px 0 0 0 #D93C85, 9999px 0 0 0 #D93C85, 10014px 0 0 0 #D93C85;
+    }
+    50% {
+        box-shadow: 9984px 0 0 0 #D93C85, 9999px -10px 0 0 #D93C85, 10014px 0 0 0 #D93C85;
+    }
+    66.667% {
+        box-shadow: 9984px 0 0 0 #D93C85, 9999px 0 0 0 #D93C85, 10014px 0 0 0 #D93C85;
+    }
+    83.333% {
+        box-shadow: 9984px 0 0 0 #D93C85, 9999px 0 0 0 #D93C85, 10014px -10px 0 0 #D93C85;
+    }
+    100% {
+        box-shadow: 9984px 0 0 0 #D93C85, 9999px 0 0 0 #D93C85, 10014px 0 0 0 #D93C85;
+    }
+}
+
+#agora_participant_homes {
+    /* width: 250px; */
+    /* not is use */
+    padding: 0;
+}
+
+.agora-host-participants-homes {
+    height: 400px;
+    overflow-y: scroll;
+}
+
+.agora-host-participants-homes::-webkit-scrollbar {
+    width: 12px;
+}
+
+.agora-host-participants-homes::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+}
+
+.agora-host-participants-homes::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
+}
+
+#agora_participant_homes li {
+    display: block;
+    width: 100%;
+    background: #D93C85;
+    color: white;
+    padding: 8px 25px;
+    border: none;
+}
+
+#mic-list {
+    width: 100%;
+    top: 30px !important;
+    background-color: rgba(0, 0, 0, 0.2);
+    box-shadow: none;
+    border: none;
+    color: white;
+}
+
+#camera-list {
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.2);
+    box-shadow: none;
+    border: none;
+    color: white;
+}
+
+
+/**
+        * Audio Visualizer 
+        */
+
+div#meters {
+    padding: 5px 0;
+    background-color: white;
+}
+
+div#meters>div {
+    /* margin: 0 0 1em 0; */
+}
+
+div#meters div.label {
+    display: inline-block;
+    font-weight: 400;
+    margin: 0 0.5em 0 0;
+    width: 3.5em;
+}
+
+div#meters div.value {
+    display: inline-block;
+}
+
+meter {
+    width: 70%;
+    height: 30px;
+}
+
+meter#clip {
+    color: #db4437;
+}
+
+meter#slow {
+    color: #f4b400;
+}
+
+#instant {
+    color: #0f9d58;
+    text-align: center;
+}

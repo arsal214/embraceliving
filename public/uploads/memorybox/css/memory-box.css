@@ -1,0 +1,9 @@
+.box-image-preview {
+    cursor: pointer;
+    width: 150px;
+    height: 150px;
+}
+
+.box-image-preview:hover {
+    opacity: .6;
+}

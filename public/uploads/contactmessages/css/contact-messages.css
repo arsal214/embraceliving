@@ -1,0 +1,68 @@
+:root {
+    --mmt-primary: #d93c85;
+    --login-button: #04afee;
+}
+
+
+/* .mmt-input-file {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}
+
+.mmt-input-file+label {
+    font-size: 16px;
+    font-weight: 600;
+    padding: 5px;
+    border-radius: 10px;
+    color: white;
+    background-color: var(--mmt-primary);
+    display: inline-block;
+}
+
+.mmt-input-file:focus+label,
+.mmt-input-file+label:hover {
+    background-color: var(--mmt-primary);
+    color: black;
+}
+
+.mmt-input-file+label {
+    cursor: pointer;
+    /* "hand" cursor */
+
+
+/* }
+.mmt-input-file:focus+label {
+    outline: none;
+}
+.mmt-input-file+label * {
+    pointer-events: none;
+} */
+
+.mmt-input-file {
+    position: relative;
+    overflow: hidden;
+}
+
+.mmt-input-file:hover {
+    cursor: pointer;
+}
+
+.mmt-input-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block;
+}
