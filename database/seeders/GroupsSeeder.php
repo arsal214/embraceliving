@@ -16,12 +16,10 @@ class GroupsSeeder extends Seeder
         DB::table('groups')->insert([
             [
               'name' => 'Four Season',
-              'headline' => 'Four Season Group',
               'description' => 'Four Season Group',
             ],
             [
               'name' => 'BrighterKind',
-              'headline' => 'BrighterKind Group',
               'description' => 'BrighterKind Group',
             ],
         ]);

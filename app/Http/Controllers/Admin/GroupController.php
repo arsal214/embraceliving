@@ -61,7 +61,6 @@ class GroupController extends Controller
         try {
             $request->validate([
                 'name' => 'required|unique:groups,name',
-                'headline' => 'required',
                 'logo' => 'required|image|mimes:jpeg,png,gif,jpg',
                 'favicon' => 'required|image|mimes:jpeg,png,gif,jpg',
                 'status' => 'required',
@@ -125,7 +124,6 @@ class GroupController extends Controller
         try{
             $request->validate([
                 'name' => 'required|unique:groups,name,' .$group->id,
-                'headline' => 'required',
                 'status' => 'required',
                 'homes' => 'required|array',
             ]);

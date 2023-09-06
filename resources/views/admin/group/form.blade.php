@@ -12,6 +12,11 @@
             {{ Form::text('footer', $group->footer, ['class' => 'form-control' . ($errors->has('footer') ? ' is-invalid' : ''), 'placeholder' => 'Footer Text']) }}
             {!! $errors->first('footer', '<div class="invalid-feedback">:message</div>') !!}
         </div>
+        <div class="form-group col-md-4 col-sm-4">
+            {{ Form::label('Homes') }}
+            {{ Form::select('homes', $homes, $group->homes, ['class' => 'form-control select2 form-select' . ($errors->has('regions') ? ' is-invalid' : ''), 'required' , 'multiple']) }}
+            {!! $errors->first('regions', '<p class="invalid-feedback">:message</p>') !!}
+        </div>
 
     </div>
     <div class="row">
