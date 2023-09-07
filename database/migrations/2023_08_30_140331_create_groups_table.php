@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('background_property')->nullable();
             $table->string('title_color')->nullable();
             $table->string('text_color')->nullable();
-            $table->string('overlay_image')->nullable();
+            $table->string('overlay')->nullable();
             $table->enum('active_overlay',['Active','InActive'])->default('Active');
             $table->string('footer_logo')->nullable();
             $table->string('footer_border')->nullable();

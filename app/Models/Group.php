@@ -75,9 +75,9 @@ class Group extends Model
         if ($backgroundImage) {
             $name = time() . '_' . $backgroundImage->getClientOriginalName();
             $backgroundImage->move('upload/groups/background_images/', $name);
-            $this->attributes['background'] = $name;
+            $this->attributes['background_image'] = $name;
         } else {
-            unset($this->attributes['background']);
+            unset($this->attributes['background_image']);
         }
     }
 
@@ -85,6 +85,64 @@ class Group extends Model
     {
         if ($backgroundImage) {
             return asset('upload/groups/background_images/' . $backgroundImage);
+        }
+        return null;
+    }
+
+
+    public function setFooterLogoAttribute($footerLogo)
+    {
+        if ($footerLogo) {
+            $name = time() . '_' . $footerLogo->getClientOriginalName();
+            $footerLogo->move('upload/groups/footer_logo/', $name);
+            $this->attributes['footer_logo'] = $name;
+        } else {
+            unset($this->attributes['footer_logo']);
+        }
+    }
+
+    public function getFooterLogoAttribute($footerLogo)
+    {
+        if ($footerLogo) {
+            return asset('upload/groups/footer_logo/' . $footerLogo);
+        }
+        return null;
+    }
+
+    public function setFooterBorderAttribute($footerBorder)
+    {
+        if ($footerBorder) {
+            $name = time() . '_' . $footerBorder->getClientOriginalName();
+            $footerBorder->move('upload/groups/footer_border/', $name);
+            $this->attributes['footer_border'] = $name;
+        } else {
+            unset($this->attributes['footer_border']);
+        }
+    }
+
+    public function getFooterBorderAttribute($footerBorder)
+    {
+        if ($footerBorder) {
+            return asset('upload/groups/footer_border/' . $footerBorder);
+        }
+        return null;
+    }
+
+    public function setOverlayAttribute($overlay)
+    {
+        if ($overlay) {
+            $name = time() . '_' . $overlay->getClientOriginalName();
+            $overlay->move('upload/groups/overlay/', $name);
+            $this->attributes['overlay'] = $name;
+        } else {
+            unset($this->attributes['overlay']);
+        }
+    }
+
+    public function getOverlayAttribute($overlay)
+    {
+        if ($overlay) {
+            return asset('upload/groups/overlay/' . $overlay);
         }
         return null;
     }
@@ -118,11 +176,11 @@ class Group extends Model
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
 
     public function homes()
     {
-        return $this->belongsTo(Home::class,);
+        return $this->belongsToMany(Home::class,'group_homes');
     }
 }

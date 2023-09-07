@@ -38,10 +38,10 @@ class Home extends Model
 
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function group()
     {
-        return $this->hasOne(Group::class);
+        return $this->belongsToMany(Group::class,'group_homes');
     }
 }

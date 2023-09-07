@@ -30,7 +30,6 @@ class GroupController extends Controller
     {
         try {
         $groups = Group::paginate();
-
         return view('admin.group.index', compact('groups'))
             ->with('i', (request()->input('page', 1) - 1) * $groups->perPage());
         } catch (\Throwable $th) {
@@ -58,6 +57,7 @@ class GroupController extends Controller
      */
     public function store(Request $request)
     {
+
         try {
             $request->validate([
                 'name' => 'required|unique:groups,name',
@@ -77,7 +77,6 @@ class GroupController extends Controller
                    ]);
                 }
             }
-
             return redirect()->route('groups.index')
                 ->with('success', 'Group created successfully.');
         } catch (\Throwable $th) {

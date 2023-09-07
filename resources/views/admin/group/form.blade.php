@@ -14,7 +14,7 @@
         </div>
         <div class="form-group col-md-4 col-sm-4">
             {{ Form::label('Homes') }}
-            {{ Form::select('homes', $homes, $group->homes, ['class' => 'form-control select2 form-select' . ($errors->has('regions') ? ' is-invalid' : ''), 'required' , 'multiple']) }}
+            {{ Form::select('homes[]', $homes, $group->homes, ['class' => 'form-control select2 form-select' . ($errors->has('regions') ? ' is-invalid' : ''), 'required' , 'multiple']) }}
             {!! $errors->first('regions', '<p class="invalid-feedback">:message</p>') !!}
         </div>
 
@@ -106,14 +106,27 @@
     <div class="row">
 
         <div class="col-6 col-md-6">
-            <label for="background">Upload Background</label>
-            <input type="file" id="background" name="background" accept="image/*" class="dropify"
-                   data-default-file="{{ $group->background ?? '' }}"/>
+            <label for="background_image">Upload Background Image</label>
+            <input type="file" id="background_image" name="background_image" accept="image/*" class="dropify"
+                   data-default-file="{{ $group->background_image ?? '' }}"/>
         </div>
         <div class="col-6 col-md-6">
             <label for="favicon">Upload Favicon</label>
             <input type="file" id="favicon" name="favicon" accept="image/*" class="dropify"
                    data-default-file="{{ $group->favicon ?? '' }}"/>
+        </div>
+    </div>
+    <div class="row">
+
+        <div class="col-6 col-md-6">
+            <label for="background">Upload Footer Logo</label>
+            <input type="file" id="footer_logo" name="footer_logo" accept="image/*" class="dropify"
+                   data-default-file="{{ $group->footer_logo ?? '' }}"/>
+        </div>
+        <div class="col-6 col-md-6">
+            <label for="favicon">Upload Footer Border</label>
+            <input type="file" id="footer_border" name="footer_border" accept="image/*" class="dropify"
+                   data-default-file="{{ $group->footer_border ?? '' }}"/>
         </div>
     </div>
 
