@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('groups', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->text('description')->nullable();
             $table->string('logo')->nullable();
             $table->string('favicon')->nullable();
             $table->string('background_image')->nullable();

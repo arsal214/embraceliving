@@ -35,7 +35,6 @@ class Group extends Model
      */
     protected $fillable = [
         'name',
-        'description',
         'logo',
         'favicon',
         'background_image',
