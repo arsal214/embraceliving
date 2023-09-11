@@ -3,7 +3,6 @@
 use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
-use App\Models\Configuration;
 use Illuminate\Support\Facades\DB;
 
 /**
@@ -21,6 +20,11 @@ function adminAllPermissions()
     }
     return $permissions;
 }
+/**
+ * Get listing of a resource.
+ *
+ * @return array
+ */
 
 function rolePermissions($id)
 {

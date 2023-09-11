@@ -1,6 +1,7 @@
  <meta charset="utf-8" />
  @php
-     $groups = auth()->user()->group;
+     $groupsData = auth()->user()->group; //for groups table only
+     $groups = getThemeData();
  @endphp
  <title>
      @if (trim($__env->yieldContent('title')))
@@ -8,7 +9,7 @@
      @endif {{ $groups->name ?? config('app.name', 'Laravel') }}
  </title>
   <!-- Styles -->
-  <link rel="icon" type="image/x-icon" href=" {{$groups->favicon ?? '/images/small_logo.png'}}" />
+  <link rel="icon" type="image/x-icon" href=" {{$groupsData->favicon ?? '/images/small_logo.png'}}" />
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport" />
   <meta name="csrf-token" content="3D1JM3mnnIBkMhO6Tj4nL6XkfUTBVT52y2TH7CUS" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"

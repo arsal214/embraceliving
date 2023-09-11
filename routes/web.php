@@ -48,16 +48,22 @@ Route::middleware('auth')->namespace('\App\Http\Controllers\Admin')->prefix('adm
     Route::resource('homes', 'HomeController')->names('homes');
     /*
     |--------------------------------------------------------------------------
-    | Homes related Route
+    | groups related Route
     |--------------------------------------------------------------------------
     */
     Route::resource('groups', 'GroupController')->names('groups');
     /*
     |--------------------------------------------------------------------------
-    | Homes related Route
+    | regions related Route
     |--------------------------------------------------------------------------
     */
     Route::resource('regions', 'RegionController')->names('regions');
+    /*
+    |--------------------------------------------------------------------------
+    | Themes related Route
+    |--------------------------------------------------------------------------
+    */
+    Route::resource('themes', 'ThemeController')->names('themes');
     /*
     |--------------------------------------------------------------------------
     | Front End related Route

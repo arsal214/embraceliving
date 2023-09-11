@@ -62,7 +62,7 @@ class RegionController extends Controller
                 'name' => 'unique:regions,name',
                 'status' => 'required',
             ]);
-            if(auth()->user()->type = 'GroupAdmin')
+            if(auth()->user()->type =='GroupAdmin')
             {
                 $request['group_id'] = auth()->user()->group->id;
             }
@@ -115,7 +115,7 @@ class RegionController extends Controller
             'name' => 'required|unique:regions,name,' . $region->id,
             'status' => 'required',
         ]);
-        if(auth()->user()->type = 'GroupAdmin')
+        if(auth()->user()->type == 'GroupAdmin')
         {
             $request['group_id'] = auth()->user()->group->id;
         }

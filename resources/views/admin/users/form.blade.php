@@ -78,13 +78,20 @@
 <script>
 
     $(document).ready(function(){
-        $('select[name="type"]').on('change', function(){
-            if($(this).val() === 'GroupAdmin'){
+        // Function to show/hide #groups element based on select box value
+        function handleTypeChange() {
+            if ($('select[name="type"]').val() === 'GroupAdmin') {
                 $('#groups').removeClass('d-none');
             } else {
                 $('#groups').addClass('d-none');
             }
-        });
+        }
+
+        // Attach the event handler to the select box change event
+        $('select[name="type"]').on('change', handleTypeChange);
+
+        // Trigger the event on page load to handle the default value
+        handleTypeChange();
     });
 </script>
 

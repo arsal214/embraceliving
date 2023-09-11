@@ -61,6 +61,16 @@
                 </li>
             @endcan
 
+            <!-- Themes -->
+            @can('themes-list')
+                <li class="nav-item">
+                    <a href="{{route('themes.index')}}" class="nav-link ">
+                        <i class="nav-icon fas fa-home"></i>
+                        <p>Themes</p>
+                    </a>
+                </li>
+            @endcan
+
 
             <!-- Users -->
             @can('users-list')

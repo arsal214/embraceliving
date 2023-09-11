@@ -186,6 +186,36 @@ class PermissionsSeeder extends Seeder
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
             ],
+
+            /* ------------------------------ Regions Permissions ----------------------------- */
+            [
+                'name' => 'themes-list',
+                'display_name' => 'themes List',
+                'guard_name' => 'web',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ],
+            [
+                'name' => 'themes-create',
+                'display_name' => 'themes Create',
+                'guard_name' => 'web',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ],
+            [
+                'name' => 'themes-edit',
+                'display_name' => 'themes Edit',
+                'guard_name' => 'web',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ],
+            [
+                'name' => 'themes-delete',
+                'display_name' => 'themes Delete',
+                'guard_name' => 'web',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ],
         ]);
     }
 }

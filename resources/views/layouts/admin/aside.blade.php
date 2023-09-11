@@ -1,6 +1,6 @@
 <aside class="main-sidebar sidebar-mmt">
     @php
-     $groups = auth()->user()->group;
+     $groups = getThemeData();
     @endphp
     <div class="logobar">
         <a href="{{url('/')}}" class="logo-link">
@@ -8,6 +8,5 @@
             {{$groups->name ?? 'Embrace Living'}}
         </a>
     </div>
-
     @include('layouts.admin.sidebar')
 </aside>

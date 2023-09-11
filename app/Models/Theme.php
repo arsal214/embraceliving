@@ -2,30 +2,33 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Group;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Class Group
+ * Class Theme
  *
  * @property $id
+ * @property $group_id
  * @property $name
  * @property $logo
- * @property $favicon
- * @property $background
- * @property $headline
- * @property $description
+ * @property $background_image
+ * @property $background_property
+ * @property $background_color
+ * @property $overlay
+ * @property $active_overlay
+ * @property $footer_logo
+ * @property $footer_border
  * @property $status
  * @property $created_at
  * @property $updated_at
  *
+ * @property Group $group
  * @package App
  * @mixin \Illuminate\Database\Eloquent\Builder
  */
-class Group extends Model
+class Theme extends Model
 {
-    use HasFactory;
-
     protected $perPage = 20;
 
     /**
@@ -33,28 +36,12 @@ class Group extends Model
      *
      * @var array
      */
-    protected $fillable = [
-        'name',
-        'logo',
-        'favicon',
-        'background_image',
-        'background_color',
-        'background_property',
-        'title_color',
-        'text_color',
-        'overlay',
-        'active_overlay',
-        'footer_logo',
-        'footer_border',
-        'status'
-
-    ];
-
+    protected $fillable = ['group_id','name','logo','background_image','background_property','background_color','overlay','active_overlay','footer_logo','footer_border','status'];
     public function setLogoAttribute($logo)
     {
         if ($logo) {
             $name = time() . '_' . $logo->getClientOriginalName();
-            $logo->move('upload/groups/logo/', $name);
+            $logo->move('upload/themes/logo/', $name);
             $this->attributes['logo'] = $name;
         } else {
             unset($this->attributes['logo']);
@@ -64,7 +51,7 @@ class Group extends Model
     public function getLogoAttribute($logo)
     {
         if ($logo) {
-            return asset('upload/groups/logo/' . $logo);
+            return asset('upload/themes/logo/' . $logo);
         }
         return null;
     }
@@ -73,7 +60,7 @@ class Group extends Model
     {
         if ($backgroundImage) {
             $name = time() . '_' . $backgroundImage->getClientOriginalName();
-            $backgroundImage->move('upload/groups/background_images/', $name);
+            $backgroundImage->move('upload/themes/background_images/', $name);
             $this->attributes['background_image'] = $name;
         } else {
             unset($this->attributes['background_image']);
@@ -83,7 +70,7 @@ class Group extends Model
     public function getBackgroundImageAttribute($backgroundImage)
     {
         if ($backgroundImage) {
-            return asset('upload/groups/background_images/' . $backgroundImage);
+            return asset('upload/themes/background_images/' . $backgroundImage);
         }
         return null;
     }
@@ -93,7 +80,7 @@ class Group extends Model
     {
         if ($footerLogo) {
             $name = time() . '_' . $footerLogo->getClientOriginalName();
-            $footerLogo->move('upload/groups/footer_logo/', $name);
+            $footerLogo->move('upload/themes/footer_logo/', $name);
             $this->attributes['footer_logo'] = $name;
         } else {
             unset($this->attributes['footer_logo']);
@@ -103,7 +90,7 @@ class Group extends Model
     public function getFooterLogoAttribute($footerLogo)
     {
         if ($footerLogo) {
-            return asset('upload/groups/footer_logo/' . $footerLogo);
+            return asset('upload/themes/footer_logo/' . $footerLogo);
         }
         return null;
     }
@@ -112,7 +99,7 @@ class Group extends Model
     {
         if ($footerBorder) {
             $name = time() . '_' . $footerBorder->getClientOriginalName();
-            $footerBorder->move('upload/groups/footer_border/', $name);
+            $footerBorder->move('upload/themes/footer_border/', $name);
             $this->attributes['footer_border'] = $name;
         } else {
             unset($this->attributes['footer_border']);
@@ -122,7 +109,7 @@ class Group extends Model
     public function getFooterBorderAttribute($footerBorder)
     {
         if ($footerBorder) {
-            return asset('upload/groups/footer_border/' . $footerBorder);
+            return asset('upload/themes/footer_border/' . $footerBorder);
         }
         return null;
     }
@@ -131,7 +118,7 @@ class Group extends Model
     {
         if ($overlay) {
             $name = time() . '_' . $overlay->getClientOriginalName();
-            $overlay->move('upload/groups/overlay/', $name);
+            $overlay->move('upload/themes/overlay/', $name);
             $this->attributes['overlay'] = $name;
         } else {
             unset($this->attributes['overlay']);
@@ -141,52 +128,17 @@ class Group extends Model
     public function getOverlayAttribute($overlay)
     {
         if ($overlay) {
-            return asset('upload/groups/overlay/' . $overlay);
+            return asset('upload/themes/overlay/' . $overlay);
         }
         return null;
     }
-
-    public function setFaviconAttribute($favicon)
-    {
-        if ($favicon) {
-            $name = time() . '_' . $favicon->getClientOriginalName();
-            $favicon->move('upload/groups/favicon/', $name);
-            $this->attributes['favicon'] = $name;
-        } else {
-            unset($this->attributes['favicon']);
-        }
-    }
-
-    public function getFaviconAttribute($favicon)
-    {
-        if ($favicon) {
-            return asset('upload/groups/favicon/' . $favicon);
-        }
-        return null;
-    }
-
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-
-    public function user()
+    public function group()
     {
-        return $this->hasOne(User::class);
+        return $this->belongsTo(Group::class);
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
-     */
 
-    public function homes()
-    {
-        return $this->belongsToMany(Home::class,'group_homes');
-    }
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function themes()
-    {
-        return $this->hasMany(Theme::class);
-    }
 }

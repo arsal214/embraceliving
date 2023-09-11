@@ -70,7 +70,7 @@ class HomeController extends Controller
                 'identifier' => 'required',
                 'status' => 'required',
             ]);
-            if (auth()->user()->type = 'GroupAdmin') {
+            if (auth()->user()->type == 'GroupAdmin') {
                 $request['group_id'] = auth()->user()->group->id;
             }
             Home::create($request->all());
@@ -124,7 +124,7 @@ class HomeController extends Controller
                 'status' => 'required',
             ]);
 
-            if (auth()->user()->type = 'GroupAdmin') {
+            if (auth()->user()->type == 'GroupAdmin') {
                 $request['group_id'] = auth()->user()->group->id;
             }
             $home->update($request->all());
