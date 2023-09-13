@@ -61,7 +61,7 @@
 
         <div class="form-group col-md-4 col-sm-4">
             <label>OverLay Status</label>
-            <select name="status" class="form-control select2">
+            <select name="active_overlay" class="form-control select2">
                 <option value="">Select Option</option>
                 <option value="Active" {{ $theme->active_overlay == 'Active' ? 'selected' : '' }}>Active
                 </option>

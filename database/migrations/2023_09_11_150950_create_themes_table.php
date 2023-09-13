@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('background_property')->nullable();
             $table->string('background_color')->nullable();
             $table->string('overlay')->nullable();
-            $table->enum('active_overlay',['Active','InActive'])->default('Active');
+            $table->enum('active_overlay',['Active','InActive'])->nullable()->default('Active');
             $table->string('footer_logo')->nullable();
             $table->string('footer_border')->nullable();
             $table->enum('status',['Active','InActive'])->default('Active');

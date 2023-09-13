@@ -56,6 +56,7 @@
                                 </thead>
                                 <tbody>
                                 @foreach ($themes as $i=> $theme)
+{{--                                    @dd($themes)--}}
                                     <tr>
                                         <td>{{ ++$i }}</td>
                                         <td>
@@ -65,11 +66,11 @@
                                         <td>
                                             <img src="{{ $theme->background_image }}" alt="{{ $theme->background_image }}" width="90px">
                                         </td>
+
                                         <td class="text-center">
                                             <span
-                                                class="badge {{$theme->status == 'Active' ? 'badge-success' :'badge-danger'}} text-uppercase">{{$theme->status}}</span>
+                                                class="badge {{$theme->pivot?->status == 'Active' ? 'badge-success' :'badge-danger'}} text-uppercase">{{isset($theme->pivot?->status) ? $theme->pivot?->status : $theme->status}}</span>
                                         </td>
-
 
                                         <td align="center">
                                             @can('themes-list')

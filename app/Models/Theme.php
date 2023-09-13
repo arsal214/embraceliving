@@ -132,12 +132,21 @@ class Theme extends Model
         }
         return null;
     }
+//    /**
+//     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+//     */
+//    public function group()
+//    {
+//        return $this->belongsTo(Group::class);
+//    }
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function group()
+    public function groups()
     {
-        return $this->belongsTo(Group::class);
+        return $this->belongsToMany(Group::class, 'group_themes')
+            ->using(GroupTheme::class)
+            ->withPivot('status');
     }
 
 

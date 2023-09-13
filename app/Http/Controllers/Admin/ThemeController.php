@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Group;
+use App\Models\GroupTheme;
 use App\Models\Theme;
 use Illuminate\Http\Request;
 
@@ -27,12 +29,21 @@ class ThemeController extends Controller
      */
     public function index()
     {
+//        $group = Group::find(1);
+//        dd($group->themes);
         try {
             if (auth()->user()->type == 'GroupAdmin') {
-                $themes = Theme::where('group_id',auth()->user()->group?->id)->get();
+                $group = Group::find(auth()->user()->group?->id);
+                $themes= $group->themes;
+//                dd($themes);
+//                $themes = Theme::with('groups')->where('group_id', auth()->user()->group?->id)->orWhereNull('group_id')->get();
             }else{
-                $themes = Theme::all();
+                $themes = Theme::with('groups')->get();
+
+
             }
+
+//            dd($themes);
             return view('admin.theme.index', compact('themes'));
         } catch (\Throwable $th) {
             return to_route('themes.index')->withErrors(['msg' => $th->getMessage()]);
@@ -58,20 +69,46 @@ class ThemeController extends Controller
      */
     public function store(Request $request)
     {
-        try {
+//        try {
             $request->validate([
                 'name' => 'required|unique:themes,name',
                 'status' => 'required',
             ]);
             if (auth()->user()->type == 'GroupAdmin') {
-                $request['group_id'] = auth()->user()->group?->id;
+                $group = auth()->user()->group;
+                if ($group) {
+                    $existingTheme = $group->themes()->where('themes.status', 'Active')->first();
+                    if ($existingTheme) {
+                        GroupTheme::where('group_id', $group->id)->update(['status' => 'InActive']);
+                    }
+                    // Assign the new theme to the group
+                    $themeData = $request->all();
+                    $themeData['group_id'] = $group->id;
+                    $theme = Theme::create($themeData);
+                    $createdBy = auth()->user()->type == 'GroupAdmin' ? 'GroupAdmin' : 'Admin';
+                    $data = [
+                        'group_id' => $group->id,
+                        'theme_id' => $theme->id,
+                        'created_by' => $createdBy,
+                    ];
+                    GroupTheme::create($data);
+                }
+            }else
+            {
+                $theme = Theme::create($request->all());
+                $groups = Group::all();
+                $createdBy = auth()->user()->type == 'GroupAdmin' ? 'GroupAdmin' : 'Admin';
+                $groupData = $groups->mapWithKeys(function ($group) use ($createdBy) {
+                    return [$group->id => ['created_by' => $createdBy]];
+                });
+                $theme->groups()->attach($groupData);
             }
-            $theme = Theme::create($request->all());
+
             return redirect()->route('themes.index')
                 ->with('success', 'Theme created successfully.');
-        } catch (\Throwable $th) {
-            return to_route('themes.store')->withErrors(['msg' => $th->getMessage()]);
-        }
+//        } catch (\Throwable $th) {
+//            return to_route('themes.store')->withErrors(['msg' => $th->getMessage()]);
+//        }
     }
 
     /**
@@ -119,7 +156,9 @@ class ThemeController extends Controller
                 $request['group_id'] = auth()->user()->group?->id;
             }
             $theme->update($request->all());
-
+            if ($request->status == 'InActive') {
+                $theme->groups()->detach();
+            }
             return redirect()->route('themes.index')
                 ->with('success', 'Theme updated successfully');
         } catch (\Throwable $th) {

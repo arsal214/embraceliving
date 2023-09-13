@@ -6,6 +6,7 @@ use App\Models\Group;
 use App\Http\Controllers\Controller;
 use App\Models\GroupHome;
 use App\Models\Home;
+use App\Models\Theme;
 use Illuminate\Http\Request;
 
 /**
@@ -21,6 +22,7 @@ class GroupController extends Controller
         $this->middleware('permission:groups-edit', ['only' => ['edit', 'update']]);
         $this->middleware('permission:groups-delete', ['only' => ['destroy']]);
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -29,9 +31,9 @@ class GroupController extends Controller
     public function index()
     {
         try {
-        $groups = Group::paginate();
-        return view('admin.group.index', compact('groups'))
-            ->with('i', (request()->input('page', 1) - 1) * $groups->perPage());
+            $groups = Group::paginate();
+            return view('admin.group.index', compact('groups'))
+                ->with('i', (request()->input('page', 1) - 1) * $groups->perPage());
         } catch (\Throwable $th) {
             return to_route('groups.index')->withErrors(['msg' => $th->getMessage()]);
         }
@@ -57,7 +59,6 @@ class GroupController extends Controller
      */
     public function store(Request $request)
     {
-
         try {
             $request->validate([
                 'name' => 'required|unique:groups,name',
@@ -67,14 +68,16 @@ class GroupController extends Controller
                 'homes' => 'required|array',
             ]);
             $group = Group::create($request->except('homes'));
-            if($group)
-            {
-                foreach ($request->homes as $home)
-                {
-                   GroupHome::create([
-                       'home_id' => $home,
-                       'group_id' => $group->id,
-                   ]);
+            $activeTheme = Theme::where('status', 'Active')->whereNull('group_id')->first();
+            if ($activeTheme) {
+                $group->themes()->attach($activeTheme->id);
+            }
+            if ($group) {
+                foreach ($request->homes as $home) {
+                    GroupHome::create([
+                        'home_id' => $home,
+                        'group_id' => $group->id,
+                    ]);
                 }
             }
             return redirect()->route('groups.index')
@@ -94,7 +97,6 @@ class GroupController extends Controller
     public function show($id)
     {
         $group = Group::find($id);
-
         return view('admin.group.show', compact('group'));
     }
 
@@ -108,7 +110,7 @@ class GroupController extends Controller
     {
         $group = Group::with('homes')->find($id);
         $homes = Home::where('status', 'Active')->pluck('title', 'id');
-        return view('admin.group.edit', compact('group','homes'));
+        return view('admin.group.edit', compact('group', 'homes'));
     }
 
     /**
@@ -120,18 +122,16 @@ class GroupController extends Controller
      */
     public function update(Request $request, Group $group)
     {
-        try{
+        try {
             $request->validate([
-                'name' => 'required|unique:groups,name,' .$group->id,
+                'name' => 'required|unique:groups,name,' . $group->id,
                 'status' => 'required',
                 'homes' => 'required|array',
             ]);
             $group->update($request->except('homes'));
-            if($group)
-            {
-                GroupHome::where('group_id',$group->id)->delete();
-                foreach ($request->homes as $home)
-                {
+            if ($group) {
+                GroupHome::where('group_id', $group->id)->delete();
+                foreach ($request->homes as $home) {
                     GroupHome::create(
                         [
                             'home_id' => $home,
@@ -139,11 +139,11 @@ class GroupController extends Controller
                     );
                 }
             }
-
-        return redirect()->route('groups.index')
-            ->with('success', 'Group updated successfully');
+            return redirect()->route('groups.index')
+                ->with('success', 'Group updated successfully');
         } catch (\Throwable $th) {
-            return redirect()->route('groups.edit', ['group' => $group->id])->withErrors(['msg' => $th->getMessage()]);        }
+            return redirect()->route('groups.edit', ['group' => $group->id])->withErrors(['msg' => $th->getMessage()]);
+        }
     }
 
     /**

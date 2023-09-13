@@ -183,10 +183,15 @@ class Group extends Model
         return $this->belongsToMany(Home::class,'group_homes');
     }
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
+//    public function themes()
+//    {
+//        return $this->hasMany(Theme::class);
+//    }
     public function themes()
     {
-        return $this->hasMany(Theme::class);
-    }
+        return $this->belongsToMany(Theme::class, 'group_themes')
+            ->using(GroupTheme::class)
+            ->withPivot('status');    }
 }
