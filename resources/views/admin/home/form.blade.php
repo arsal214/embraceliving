@@ -3,7 +3,7 @@
 
         <div class="form-group col-md-4 col-sm-4">
             {{ Form::label('title') }}
-            {{ Form::text('title', $home->title, ['class' => 'form-control' . ($errors->has('title') ? ' is-invalid' : ''), 'placeholder' => 'Title']) }}
+            {{ Form::text('title', $home->title, ['class' => 'form-control' . ($errors->has('title') ? ' is-invalid' : ''), 'required', 'placeholder' => 'Title']) }}
             {!! $errors->first('title', '<div class="invalid-feedback">:message</div>') !!}
         </div>
         <div class="form-group col-md-4 col-sm-4">
@@ -20,13 +20,13 @@
     <div class="row">
         <div class="form-group col-md-4 col-sm-4">
             {{ Form::label('identifier') }}
-            {{ Form::text('identifier', $home->identifier, ['class' => 'form-control' . ($errors->has('identifier') ? ' is-invalid' : ''), 'placeholder' => 'Identifier']) }}
+            {{ Form::text('identifier', $home->identifier, ['class' => 'form-control' . ($errors->has('identifier') ? ' is-invalid' : ''), 'required','placeholder' => 'Identifier']) }}
             {!! $errors->first('identifier', '<div class="invalid-feedback">:message</div>') !!}
         </div>
 
         <div class=" form-group col-md-4 col-sm-4">
             <label>Status</label>
-            <select name="status" class="form-control select2">
+            <select name="status" required="required" class="form-control select2">
                 <option value="">Select Option</option>
                 <option value="Active" {{ $home->status == 'Active' ? 'selected' : '' }}>Active
                 </option>

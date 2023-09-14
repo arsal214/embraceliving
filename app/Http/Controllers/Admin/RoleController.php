@@ -52,17 +52,23 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'role'       => 'required|unique:roles,name',
-            'permissions'=> 'required'
-        ]);
-        $role = Role::create(['name' => $request->input('role'),
-            'guard_name' => 'web'
-        ]);
-        $role->syncPermissions($request->input('permissions'));
+        try
+        {
+            $this->validate($request, [
+                'role'       => 'required|unique:roles,name',
+                'permissions'=> 'required'
+            ]);
+            $role = Role::create(['name' => $request->input('role'),
+                'guard_name' => 'web'
+            ]);
+            $role->syncPermissions($request->input('permissions'));
 
-        return redirect()->route('roles.index')
-            ->with('success', 'Role created successfully.');
+            return redirect()->route('roles.index')
+                ->with('success', 'Role created successfully.');
+        }catch (\Throwable $th) {
+            return back()->withErrors(['msg' => $th->getMessage()]);
+        }
+
     }
 
     /**
@@ -100,18 +106,24 @@ class RoleController extends Controller
      */
     public function update(Request $request, Role $role)
     {
-        $this->validate($request, [
-            'role'        => 'required',
-            'permissions' => 'required'
-        ]);
+        try {
+            $this->validate($request, [
+                'role'        => 'required|unique:roles,name' .$role->id,
+                'permissions' => 'required'
+            ]);
 
-        $role->name = $request->input('role');
-        $role->guard_name = 'web';
-        $role->save();
-        $role->syncPermissions($request->input('permissions'));;
+            $role->name = $request->input('role');
+            $role->guard_name = 'web';
+            $role->save();
+            $role->syncPermissions($request->input('permissions'));;
 
-        return redirect()->route('roles.index')
-            ->with('success', 'Role updated successfully');
+            return redirect()->route('roles.index')
+                ->with('success', 'Role updated successfully');
+        }catch (\Throwable $th) {
+            return back()->withErrors(['msg' => $th->getMessage()]);
+        }
+
+
     }
 
     /**

@@ -2,12 +2,12 @@
     <div class="row">
         <div class="form-group col-md-6 col-sm-6">
             {{ Form::label('Name') }}
-            {{ Form::text('name', $theme->name, ['class' => 'form-control' . ($errors->has('name') ? ' is-invalid' : ''), 'placeholder' => 'Name']) }}
+            {{ Form::text('name', $theme->name, ['class' => 'form-control' . ($errors->has('name') ? ' is-invalid' : ''), 'required', 'placeholder' => 'Name']) }}
             {!! $errors->first('name', '<div class="invalid-feedback">:message</div>') !!}
         </div>
         <div class="form-group col-md-6 col-sm-6">
             <label>Status</label>
-            <select name="status" class="form-control select2">
+            <select name="status" required="required" class="form-control select2">
                 <option value="">Select Option</option>
                 <option value="Active" {{ $theme->status == 'Active' ? 'selected' : '' }}>Active
                 </option>
@@ -46,7 +46,7 @@
         </div>
         <div id="background_color" class=" form-group col-md-4 col-sm-4 d-none">
             {{ Form::label('Background Color') }}
-            {{ Form::color('background_color', $theme->background_color, ['class' => 'form-control' . ($errors->has('background_color') ? ' is-invalid' : ''), 'placeholder' => 'background color']) }}
+            {{ Form::color('background_color', $theme->background_color, ['class' => 'form-control' . ($errors->has('background_color') ? ' is-invalid' : ''), 'required', 'placeholder' => 'background color']) }}
             {!! $errors->first('background_color', '<div class="invalid-feedback">:message</div>') !!}
         </div>
         <div  class="col-4 col-md-4" id="background_image_div">
@@ -61,7 +61,7 @@
 
         <div class="form-group col-md-4 col-sm-4">
             <label>OverLay Status</label>
-            <select name="active_overlay" class="form-control select2">
+            <select name="active_overlay" required="required" class="form-control select2">
                 <option value="">Select Option</option>
                 <option value="Active" {{ $theme->active_overlay == 'Active' ? 'selected' : '' }}>Active
                 </option>

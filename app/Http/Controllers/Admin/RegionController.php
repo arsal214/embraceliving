@@ -57,7 +57,6 @@ class RegionController extends Controller
     public function store(Request $request)
     {
         try {
-
             $request->validate([
                 'name' => 'unique:regions,name',
                 'status' => 'required',

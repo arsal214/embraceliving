@@ -29,8 +29,6 @@ class ThemeController extends Controller
      */
     public function index()
     {
-//        $group = Group::find(1);
-//        dd($group->themes);
         try {
             if (auth()->user()->type == 'GroupAdmin') {
                 $group = Group::find(auth()->user()->group?->id);
@@ -39,10 +37,7 @@ class ThemeController extends Controller
 //                $themes = Theme::with('groups')->where('group_id', auth()->user()->group?->id)->orWhereNull('group_id')->get();
             }else{
                 $themes = Theme::with('groups')->get();
-
-
             }
-
 //            dd($themes);
             return view('admin.theme.index', compact('themes'));
         } catch (\Throwable $th) {
@@ -69,7 +64,7 @@ class ThemeController extends Controller
      */
     public function store(Request $request)
     {
-//        try {
+        try {
             $request->validate([
                 'name' => 'required|unique:themes,name',
                 'status' => 'required',
@@ -106,9 +101,9 @@ class ThemeController extends Controller
 
             return redirect()->route('themes.index')
                 ->with('success', 'Theme created successfully.');
-//        } catch (\Throwable $th) {
-//            return to_route('themes.store')->withErrors(['msg' => $th->getMessage()]);
-//        }
+        } catch (\Throwable $th) {
+            return back()->withErrors(['msg' => $th->getMessage()]);
+        }
     }
 
     /**

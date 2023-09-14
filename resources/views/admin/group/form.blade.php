@@ -3,7 +3,7 @@
 
         <div class="form-group col-md-4 col-sm-4">
             {{ Form::label('Name') }}
-            {{ Form::text('name', $group->name, ['class' => 'form-control' . ($errors->has('name') ? ' is-invalid' : ''), 'placeholder' => 'Name']) }}
+            {{ Form::text('name', $group->name, ['class' => 'form-control' . ($errors->has('name') ? ' is-invalid' : ''), 'required', 'placeholder' => 'Name']) }}
             {!! $errors->first('name', '<div class="invalid-feedback">:message</div>') !!}
         </div>
 
@@ -14,7 +14,7 @@
         </div>
         <div class="form-group col-md-4 col-sm-4">
             <label>Status</label>
-            <select name="status" class="form-control select2">
+            <select name="status" required="required" class="form-control select2">
                 <option value="">Select Option</option>
                 <option value="Active" {{ $group->status == 'Active' ? 'selected' : '' }}>Active
                 </option>
@@ -90,7 +90,7 @@
 
         <div class="form-group col-md-4 col-sm-4">
             <label>OverLay Status</label>
-            <select name="active_overlay" class="form-control select2">
+            <select name="active_overlay" required="required" class="form-control select2">
                 <option value="">Select Option</option>
                 <option value="Active" {{ $group->active_overlay == 'Active' ? 'selected' : '' }}>Active
                 </option>

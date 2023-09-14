@@ -63,7 +63,7 @@
 
                                             </td>
                                         @endforeach
-                                        <td></td>
+                                        <td>{{$user?->group?->name}}</td>
                                         <td class="text-center">
                                             <span
                                                 class="badge {{$user->status == 'Active' ? 'badge-success' :'badge-danger'}} text-uppercase">{{$user->status}}</span>

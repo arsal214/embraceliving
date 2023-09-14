@@ -31,7 +31,7 @@ class GroupController extends Controller
     public function index()
     {
         try {
-            $groups = Group::paginate();
+            $groups = Group::with(['homes','user'])->paginate();
             return view('admin.group.index', compact('groups'))
                 ->with('i', (request()->input('page', 1) - 1) * $groups->perPage());
         } catch (\Throwable $th) {
@@ -83,7 +83,7 @@ class GroupController extends Controller
             return redirect()->route('groups.index')
                 ->with('success', 'Group created successfully.');
         } catch (\Throwable $th) {
-            return to_route('groups.index')->withErrors(['msg' => $th->getMessage()]);
+            return  redirect()->back()->withErrors(['msg' => $th->getMessage()]);
         }
 
     }
@@ -142,7 +142,7 @@ class GroupController extends Controller
             return redirect()->route('groups.index')
                 ->with('success', 'Group updated successfully');
         } catch (\Throwable $th) {
-            return redirect()->route('groups.edit', ['group' => $group->id])->withErrors(['msg' => $th->getMessage()]);
+            return  redirect()->back()->withErrors(['msg' => $th->getMessage()]);
         }
     }
 

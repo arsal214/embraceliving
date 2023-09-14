@@ -8,6 +8,11 @@
 @section('content')
     <div class="content-wrapper">
         <section class="content">
+            @if($errors->any())
+                <div class="alert alert-danger">
+                    {{ $errors->first('msg') }}
+                </div>
+            @endif
             <form method="POST" action="{{ route('regions.update', $region->id) }}" role="form"
                   enctype="multipart/form-data">
                 {{ method_field('PATCH') }}

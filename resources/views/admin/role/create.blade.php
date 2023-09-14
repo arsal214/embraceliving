@@ -5,9 +5,13 @@
 @endsection
 
 @section('content')
-
     <div class="content-wrapper">
         <section class="content">
+            @if($errors->any())
+                <div class="alert alert-danger">
+                    {{ $errors->first('msg') }}
+                </div>
+            @endif
                 <form method="POST" action="{{ route('roles.store') }}"  role="form" enctype="multipart/form-data">
                     @csrf
                 <div class="container-fluid">
@@ -50,4 +54,18 @@
         </section>
     </div>
 
+@endsection
+@section('page-script')
+    <script>
+        const selectAll = document.querySelectorAll('.selectAll'),
+            checkboxList = document.querySelectorAll('[type="checkbox"]');
+
+        selectAll.forEach(element => {
+            element.addEventListener('change', t => {
+                checkboxList.forEach(e => {
+                    e.checked = t.target.checked;
+                });
+            });
+        });
+    </script>
 @endsection

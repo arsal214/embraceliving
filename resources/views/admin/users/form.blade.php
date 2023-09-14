@@ -2,19 +2,19 @@
     <div class="row">
         <div class="form-group col-md-6 col-sm-6">
             {{ Form::label('First Name') }}
-            {{ Form::text('first_name', $user->first_name, ['class' => 'form-control' . ($errors->has('first_name') ? ' is-invalid' : ''), 'placeholder' => 'First Name']) }}
+            {{ Form::text('first_name', $user->first_name, ['class' => 'form-control' . ($errors->has('first_name') ? ' is-invalid' : ''), 'required', 'placeholder' => 'First Name']) }}
             {!! $errors->first('first_name', '<div class="invalid-feedback">:message</div>') !!}
         </div>
         <div class="form-group col-md-6 col-sm-6">
             {{ Form::label('Last Name') }}
-            {{ Form::text('last_name', $user->last_name, ['class' => 'form-control' . ($errors->has('last_name') ? ' is-invalid' : ''), 'placeholder' => 'Last Name']) }}
+            {{ Form::text('last_name', $user->last_name, ['class' => 'form-control' . ($errors->has('last_name') ? ' is-invalid' : ''),  'required','placeholder' => 'Last Name']) }}
             {!! $errors->first('last_name', '<div class="invalid-feedback">:message</div>') !!}
         </div>
     </div>
     <div class="row">
         <div class="form-group col-md-6 col-sm-6">
             {{ Form::label('UserName') }}
-            {{ Form::text('username', $user->username, ['class' => 'form-control' . ($errors->has('username') ? ' is-invalid' : ''), 'placeholder' => 'User Name']) }}
+            {{ Form::text('username', $user->username, ['class' => 'form-control' . ($errors->has('username') ? ' is-invalid' : ''), 'required', 'placeholder' => 'User Name']) }}
             {!! $errors->first('username', '<div class="invalid-feedback">:message</div>') !!}
             <small><b>Note:</b> Username must contain min. 8 characters.</small>
         </div>
@@ -29,7 +29,7 @@
     <div class="row form-group">
         <div class="col-md-6 col-sm-6">
             {{ Form::label('email') }}
-            {{ Form::email('email', $user->email, ['class' => 'form-control' . ($errors->has('email') ? ' is-invalid' : ''), 'placeholder' => 'Email','required']) }}
+            {{ Form::email('email', $user->email, ['class' => 'form-control' . ($errors->has('email') ? ' is-invalid' : ''), 'required', 'placeholder' => 'Email','required']) }}
             {!! $errors->first('email', '<p class="invalid-feedback">:message</p>') !!}
 
         </div>
@@ -42,7 +42,7 @@
     <div class="row">
         <div class="col-4 col-md-4">
         <label>Type</label>
-        <select name="type" class="form-control select2">
+        <select name="type" required="required" class="form-control select2">
             <option value="">Select Option</option>
             <option value="Admin" {{ $user->type == 'Admin' ? 'selected' : '' }}>Admin
             </option>
@@ -52,12 +52,12 @@
         </div>
         <div class="col-4 col-md-4 {{($user->type == 'Admin') ? 'd-none' : ''}} " id="groups">
             {{ Form::label('group') }}
-            {{ Form::select('group_id', ['' => 'Please select a group...'] + $groups->toArray(), $user->group_id, ['class' => 'form-control select2 form-select' . ($errors->has('groups') ? ' is-invalid' : ''), 'required']) }}
+            {{ Form::select('group_id', ['' => 'Please select a group...'] + $groups->toArray(), $user->group_id, ['class' => 'form-control select2 form-select' . ($errors->has('groups') ? ' is-invalid' : '')]) }}
             {!! $errors->first('groups', '<p class="invalid-feedback">:message</p>') !!}
         </div>
         <div class="col-4 col-md-4">
             <label>Status</label>
-            <select name="status" class="form-control select2">
+            <select name="status" required="required" class="form-control select2">
                 <option value="">Select Option</option>
                 <option value="Active" {{ $user->status == 'Active' ? 'selected' : '' }}>Active
                 </option>

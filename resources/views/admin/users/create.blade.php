@@ -5,6 +5,11 @@
     <!-- Content Body -->
     <div class="content-wrapper">
         <section class="content">
+            @if($errors->any())
+                <div class="alert alert-danger">
+                    {{ $errors->first('msg') }}
+                </div>
+            @endif
             <form method="post" action="{{route('users.store')}}" enctype="multipart/form-data">
                 @csrf
                 <div class="container-fluid">

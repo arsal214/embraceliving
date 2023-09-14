@@ -49,8 +49,8 @@
                                     <th>No</th>
                                     <th>Logo</th>
                                     <th>Name</th>
-                                    <th>Headline</th>
-                                    <th>Description</th>
+                                    <th>No. of homes</th>
+                                    <th>No. of Group</th>
                                     <th>Status</th>
 
                                     <th >Action</th>
@@ -64,8 +64,8 @@
                                             <img src="{{$group->logo}}" alt="{{$group->name}}" width="90px">
                                         </td>
                                         <td>{{ $group->name }}</td>
-                                        <td>{{ $group->headline }}</td>
-                                        <td>{{ $group->description }}</td>
+                                        <td>{{ count($group->homes) }}</td>
+                                        <td>{{ count($group->user) }}</td>
                                         <td class="text-center">
                                             <span
                                                 class="badge {{$group->status == 'Active' ? 'badge-success' :'badge-danger'}} text-uppercase">{{$group->status}}</span>

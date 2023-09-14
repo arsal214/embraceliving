@@ -30,7 +30,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::all();
+        $users = User::with('group')->get();
 
         return view('admin.users.index', compact('users'),compact('users'));
     }
@@ -56,28 +56,33 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'first_name' => 'required',
-            'last_name' => 'required',
-            'username' => 'required',
-            'email' => 'required',
-            'status' => 'required'
-        ]);
-        if($request->type = 'GroupAdmin')
-        {
+        try {
             $request->validate([
-                'group_id' => 'required',
+                'first_name' => 'required',
+                'last_name' => 'required',
+                'username' => 'required|unique:users,username',
+                'email' => 'required|unique:users,email',
+                'status' => 'required'
             ]);
-        }
-        $request['password'] = bcrypt($request->password) ;
-        $user = User::create($request->all());
-        foreach ($request->roles as $role)
-        {
-            $user->assignRole($role);
+            if($request->type == 'GroupAdmin')
+            {
+                $request->validate([
+                    'group_id' => 'required',
+                ]);
+            }
+            $request['password'] = bcrypt($request->password) ;
+            $user = User::create($request->all());
+            foreach ($request->roles as $role)
+            {
+                $user->assignRole($role);
+            }
+
+            return redirect()->route('users.index')
+                ->with('success', 'User created successfully.');
+        }catch (\Throwable $th) {
+            return back()->withErrors(['msg' => $th->getMessage()]);
         }
 
-        return redirect()->route('users.index')
-            ->with('success', 'User created successfully.');
     }
 
     /**
@@ -119,10 +124,16 @@ class UserController extends Controller
         $request->validate([
             'first_name' => 'required',
             'last_name' => 'required',
-            'username' => 'required',
-            'email' => 'required',
+            'username' => 'required|unique:users,username,' . $user->id,
+            'email' => 'required|unique:users,email,' . $user->id,
             'status' => 'required'
         ]);
+//        if($request->type == 'GroupAdmin')
+//        {
+//            $request->validate([
+//                'group_id' => 'required',
+//            ]);
+//        }
         $input = $request->all();
         if (empty($input['password']) || $input['password'] == null) {
             $input = Arr::except($input, array('password'));

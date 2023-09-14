@@ -166,12 +166,12 @@ class Group extends Model
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
 
     public function user()
     {
-        return $this->hasOne(User::class);
+        return $this->hasMany(User::class);
     }
 
     /**

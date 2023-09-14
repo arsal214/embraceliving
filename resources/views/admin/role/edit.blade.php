@@ -5,6 +5,11 @@
     <!-- Content Body -->
     <div class="content-wrapper">
         <section class="content">
+            @if($errors->any())
+                <div class="alert alert-danger">
+                    {{ $errors->first('msg') }}
+                </div>
+            @endif
             <form method="post" action="{{route('roles.update',$role->id)}}">
                 @method('PUT')
                 @csrf
@@ -50,4 +55,17 @@
             </form>
         </section>
     </div>
+@endsection
+@section('page-script')
+    <script>
+        const selectAll = document.querySelectorAll('.selectAll'),
+            checkboxList = document.querySelectorAll('[type="checkbox"]');
+        selectAll.forEach(element => {
+            element.addEventListener('change', t => {
+                checkboxList.forEach(e => {
+                    e.checked = t.target.checked;
+                });
+            });
+        });
+    </script>
 @endsection
