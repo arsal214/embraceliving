@@ -187,7 +187,7 @@ class PermissionsSeeder extends Seeder
                 'updated_at' => Carbon::now()
             ],
 
-            /* ------------------------------ Regions Permissions ----------------------------- */
+            /* ------------------------------ Themes Permissions ----------------------------- */
             [
                 'name' => 'themes-list',
                 'display_name' => 'themes List',
@@ -211,6 +211,35 @@ class PermissionsSeeder extends Seeder
             ],
             [
                 'name' => 'themes-delete',
+                'display_name' => 'themes Delete',
+                'guard_name' => 'web',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ],
+            /* ------------------------------ Page Permissions ----------------------------- */
+            [
+                'name' => 'page-list',
+                'display_name' => 'page List',
+                'guard_name' => 'web',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ],
+            [
+                'name' => 'page-create',
+                'display_name' => 'page Create',
+                'guard_name' => 'web',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ],
+            [
+                'name' => 'page-edit',
+                'display_name' => 'page Edit',
+                'guard_name' => 'web',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ],
+            [
+                'name' => 'page-delete',
                 'display_name' => 'themes Delete',
                 'guard_name' => 'web',
                 'created_at' => Carbon::now(),

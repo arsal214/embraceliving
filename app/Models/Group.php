@@ -193,5 +193,15 @@ class Group extends Model
     {
         return $this->belongsToMany(Theme::class, 'group_themes')
             ->using(GroupTheme::class)
-            ->withPivot('status');    }
+            ->withPivot('status');
+    }
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function pages()
+    {
+        return $this->belongsTo(Page::class);
+    }
+
 }
+

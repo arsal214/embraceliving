@@ -32,6 +32,15 @@
                     </a>
                 </li>
             @endcan
+{{--            @can('pages-list')--}}
+                <!-- Roles -->
+                <li class="nav-item">
+                    <a href="{{route('pages.index')}}" class="nav-link ">
+                        <i class="nav-icon fas fa-seedling"></i>
+                        <p>Pages</p>
+                    </a>
+                </li>
+{{--            @endcan--}}
             @can('regions-list')
                 <!-- Roles -->
                 <li class="nav-item">

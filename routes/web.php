@@ -66,6 +66,12 @@ Route::middleware('auth')->namespace('\App\Http\Controllers\Admin')->prefix('adm
     Route::resource('themes', 'ThemeController')->names('themes');
     /*
     |--------------------------------------------------------------------------
+    | Themes related Route
+    |--------------------------------------------------------------------------
+    */
+    Route::resource('pages', 'PageController')->names('pages');
+    /*
+    |--------------------------------------------------------------------------
     | Front End related Route
     |--------------------------------------------------------------------------
     */

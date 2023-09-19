@@ -21,9 +21,6 @@
                                 <h1 class="m-0">Create Region </h1>
                             </div>
                             <div class="col-md-5 col-sm-12 text-right">
-                                <input type="hidden"/>
-                                <input type="hidden">
-                                <input type="hidden">
                                 <button type="submit" class="save-btn" id="user"><i
                                         class="fas fa-external-link-square-alt"> </i> <br>
                                     Submit
