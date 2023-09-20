@@ -167,7 +167,7 @@
         $(document).ready(function(){
             // Function to show/hide #groups element based on select box value
             function handleTypeChange() {
-                if ($('select[name="page_type"]').val() === 'GroupAdmin') {
+                if ($('select[name="page_type"]').val() === 'iFrame') {
                     $('#script').removeClass('d-none');
                 } else {
                     $('#script').addClass('d-none');
